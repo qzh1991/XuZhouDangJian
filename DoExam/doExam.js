@@ -29,34 +29,25 @@ function main() {
             for (let i = 0; i < results.length; i++) {
                 let result = results[i]
                 if (result.s == 1) {
-                    let answerIndex = result.a - 65
-                    let optionsInput = $(optionsArray[i]).find('input');
-                    $(optionsInput[answerIndex]).attr('checked', 'true');
-                    $(optionsInput[answerIndex])[0].checked = true;
+                    if(i<76){
+                        let answerArray = result.a.split('')
+                        answerArray.forEach(answer => {
+                            let answerIndex = answer.charCodeAt(0)-65
+                            let optionsInput = $(optionsArray[i]).find('input')
+                            $(optionsInput[answerIndex]).attr('checked', 'true')
+                            $(optionsInput[answerIndex])[0].checked = true
+                        });
+                    }else{
+                        let answerIndex = result.a == "对" ? 0 : 1
+                        let optionsInput = $(optionsArray[i]).find('input')
+                        $(optionsInput[answerIndex]).attr('checked', 'true')
+                        $(optionsInput[answerIndex])[0].checked = true
+                    }
                     //let answerText = $(optionsArray[i]).find('label');
                 }else{
-                    window.prompt('以下题目未找到答案，请手动选择。',option.a);
+                    window.prompt('以下题目未找到答案，请手动选择。',result.a)
                 }
             }
-
-            // for (let i = 0; i < optionsArray.length; i++) {
-            //     let options = optionsArray[i];
-            //     let answerInput = $(options).find('input');
-            //     let answerText = $(options).find('label');
-            //     let option = r[i]
-            //     if (option.s == 1) {
-            //         for (let j = 0; j < answerText.length; j++) {
-            //             let v = $(answerText[j]).text();
-            //             if ((option.a).indexOf(v.slice(0, 1)) >= 0 ||
-            //                 (option.a).indexOf(v.slice(v.length - 1, v.length)) >= 0) {
-            //                 $(answerInput[j]).attr('checked', 'true');
-            //                 $(answerInput[j])[0].checked = true;
-            //             };
-            //         };
-            //     }else{
-            //         window.prompt('以下题目未找到答案，请手动选择。',option.a);
-            //     }
-            // }
         }
     })
 
