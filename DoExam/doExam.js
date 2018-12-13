@@ -1,12 +1,12 @@
 function main() {
     let results = []
-    let main = $('div.item');
+    let main = $('div.main');
     if(main[0]==null) {
         console.log('网页错误')
         return
     }
-    let questions = main.find('div.title1');
-    let options = main.find('div.ab');
+    let questions = main.find('td[class="hs11"]:even');
+    let answers = main.find('td[class="hs11"]:odd');
     let array = []
     for (let i = 0; i < questions.length; i++) {
         let v = questions[i];
@@ -26,19 +26,18 @@ function main() {
         },
         success: function(r) {
             console.log(r)
-            var qs = $('div.ab');
-            for (let i = 0; i < qs.length; i++) {
-                let q = qs[i];
-                let os = $(q).find('input');
-                let ops = $(q).find('.op');
+            for (let i = 0; i < answers.length; i++) {
+                let answer = answers[i];
+                let answerInput = $(answer).find('input');
+                let answerText = $(answer).find('label');
                 let a = r[i]
                 if (a.s == 1) {
-                    for (let j = 0; j < ops.length; j++) {
-                        let v = $(ops[j]).text();
+                    for (let j = 0; j < answerText.length; j++) {
+                        let v = $(answerText[j]).text();
                         if ((a.a).indexOf(v.slice(0, 1)) >= 0 ||
                             (a.a).indexOf(v.slice(v.length - 1, v.length)) >= 0) {
-                            $(os[j]).attr('checked', 'true');
-                            $(os[j])[0].checked = true;
+                            $(answerInput[j]).attr('checked', 'true');
+                            $(answerInput[j])[0].checked = true;
                         };
                     };
                 }else{
