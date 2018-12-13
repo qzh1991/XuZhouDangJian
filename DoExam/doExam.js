@@ -28,9 +28,9 @@ function main() {
             console.log(results)
             for (let i = 0; i < results.length; i++) {
                 let result = results[i]
-                if (result.s == 1) {
+                if (result.state == 1) {
                     if(i<76){
-                        let answerArray = result.a.split('')
+                        let answerArray = result.answer.split('')
                         answerArray.forEach(answer => {
                             let answerIndex = answer.charCodeAt(0)-65
                             let optionsInput = $(optionsArray[i]).find('input')
@@ -38,14 +38,14 @@ function main() {
                             $(optionsInput[answerIndex])[0].checked = true
                         });
                     }else{
-                        let answerIndex = result.a == "对" ? 0 : 1
+                        let answerIndex = result.answer == "对" ? 0 : 1
                         let optionsInput = $(optionsArray[i]).find('input')
                         $(optionsInput[answerIndex]).attr('checked', 'true')
                         $(optionsInput[answerIndex])[0].checked = true
                     }
                     //let answerText = $(optionsArray[i]).find('label');
                 }else{
-                    window.prompt('以下题目未找到答案，请手动选择。',result.a)
+                    window.prompt('以下题目未找到答案，请手动选择。',result.question)
                 }
             }
         }
